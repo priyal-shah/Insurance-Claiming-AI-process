@@ -4,13 +4,13 @@ export default function Sidebar() {
   const { pathname } = useLocation();
 
   const menu = [
+     ["Upload", "/upload"],
     ["Dashboard", "/dashboard"],
     ["Claims", "/claims"],
-    ["Upload", "/upload"],
     ["Risk Report", "/report"],
     ["Alerts", "/alerts"],
-    ["Analytics", "/analytics"],
-    ["Settings", "/settings"],
+    /*["Analytics", "/analytics"],
+    ["Settings", "/settings"],*/
   ];
 
   return (
