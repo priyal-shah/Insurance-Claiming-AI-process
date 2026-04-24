@@ -2,10 +2,7 @@ import AppLayout from "../layout/AppLayout";
 import KPI from "../components/KPI";
 import Charts from "../components/Charts";
 
-import {
-  stats,
-  findings
-} from "../data/ragMockData";
+import { ragResult } from "../data/ragMockData";
 
 export default function Dashboard() {
   return (
@@ -13,13 +10,10 @@ export default function Dashboard() {
 
       <div className="grid md:grid-cols-4 gap-4">
 
-        {stats.map((item) => (
-          <KPI
-            key={item.title}
-            title={item.title}
-            value={item.value}
-          />
-        ))}
+        <KPI title="Risk Score" value={`${ragResult.summary.riskScore}%`} />
+        <KPI title="Confidence" value={`${ragResult.summary.confidence}%`} />
+        <KPI title="Status" value={ragResult.summary.status} />
+        <KPI title="Review Time" value={ragResult.summary.processingTime} />
 
       </div>
 
@@ -39,16 +33,13 @@ export default function Dashboard() {
             Latest Findings
           </h2>
 
-          {findings.map((item) => (
+          {ragResult.findings.map((item) => (
             <div
-              key={item.issue}
+              key={item.id}
               className="bg-white/5 p-4 rounded-2xl mb-3"
             >
-              <div className="font-medium">
-                {item.issue}
-              </div>
-
-              <div className="text-sm text-rose-300 mt-1">
+              <div>{item.issue}</div>
+              <div className="text-rose-300 text-sm mt-1">
                 {item.severity}
               </div>
             </div>

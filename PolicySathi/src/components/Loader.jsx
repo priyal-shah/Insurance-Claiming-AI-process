@@ -6,7 +6,7 @@ export default function Loader() {
         AI Processing
       </h2>
 
-      <div className="space-y-4">
+      <div className="space-y-4 text-slate-300">
 
         <div>📄 Extracting text...</div>
         <div>🔍 Checking regulations...</div>

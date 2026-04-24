@@ -7,6 +7,7 @@ export default function KPI({ title, value }) {
       transition={{ duration: 0.2 }}
       className="bg-white/5 border border-white/10 p-6 rounded-3xl shadow-glow"
     >
+
       <p className="text-slate-400 text-sm">
         {title}
       </p>
@@ -14,6 +15,7 @@ export default function KPI({ title, value }) {
       <h2 className="text-4xl font-bold mt-2">
         {value}
       </h2>
+
     </motion.div>
   );
 }

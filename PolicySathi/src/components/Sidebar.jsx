@@ -7,6 +7,7 @@ export default function Sidebar() {
     ["Dashboard", "/dashboard"],
     ["Claims", "/claims"],
     ["Upload", "/upload"],
+    ["Risk Report", "/report"],
     ["Alerts", "/alerts"],
     ["Analytics", "/analytics"],
     ["Settings", "/settings"],
@@ -15,11 +16,11 @@ export default function Sidebar() {
   return (
     <div className="w-72 bg-white/5 border-r border-white/10 p-6 hidden md:block">
 
-      <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-10">
+      <h1 className="text-3xl font-bold mb-10 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
         PolicySathi
       </h1>
 
-      {menu.map(([name,path]) => (
+      {menu.map(([name, path]) => (
         <Link
           key={path}
           to={path}

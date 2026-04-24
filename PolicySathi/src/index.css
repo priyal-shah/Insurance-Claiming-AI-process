@@ -5,13 +5,19 @@
 body {
   margin: 0;
   font-family: Inter, sans-serif;
-  background: linear-gradient(135deg,#020617,#0f172a,#1e1b4b);
+  background: linear-gradient(
+    135deg,
+    #020617,
+    #0f172a,
+    #1e1b4b
+  );
   color: white;
 }
 
 * {
   box-sizing: border-box;
 }
+
 ::-webkit-scrollbar {
   width: 8px;
 }

@@ -1,26 +1,5 @@
 import AppLayout from "../layout/AppLayout";
-import Tables from "../components/Tables";
-
-const rows = [
-  {
-    id: "CL101",
-    customer: "Rahul Sharma",
-    amount: "₹45,000",
-    status: "Pending"
-  },
-  {
-    id: "CL102",
-    customer: "Neha Verma",
-    amount: "₹82,000",
-    status: "Approved"
-  },
-  {
-    id: "CL103",
-    customer: "Arjun Patel",
-    amount: "₹1,20,000",
-    status: "Rejected"
-  }
-];
+import { queueData } from "../data/ragMockData";
 
 export default function Claims() {
   return (
@@ -30,7 +9,26 @@ export default function Claims() {
         Claims Review Center
       </h1>
 
-      <Tables rows={rows} />
+      <div className="space-y-4">
+
+        {queueData.map((item) => (
+          <div
+            key={item.id}
+            className="bg-white/5 border border-white/10 p-5 rounded-3xl flex justify-between"
+          >
+            <div>
+              <div className="font-semibold">{item.id}</div>
+              <div className="text-slate-400">{item.customer}</div>
+            </div>
+
+            <div>{item.amount}</div>
+
+            <div>{item.status}</div>
+
+          </div>
+        ))}
+
+      </div>
 
     </AppLayout>
   );
