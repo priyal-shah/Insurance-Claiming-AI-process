@@ -37,7 +37,11 @@ import numpy as np
 
 # Add BackEnd to path and import utilities
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'BackEnd'))
-from BackEnd.Utils import extract_text, redact_pii, chunk_text, retrieve_context, mock_llm_analysis, validate_output
+from BackEnd.Utils import (
+    extract_text, redact_pii, chunk_text, retrieve_context,
+    mock_llm_analysis, validate_output, extract_customer_name
+)
+import time
 
 app = Flask(__name__)
 
@@ -66,10 +70,15 @@ index.add(np.array(reg_embeddings))
 
 @app.route("/analyze", methods=["POST"])
 def analyze():
+    start_time = time.time()
     file = request.files["file"]
+    file_name = file.filename
 
-    # Step 1: Extract
+    # Step 1: Extract raw text
     text = extract_text(file)
+
+    # Extract customer name before redaction
+    customer_name = extract_customer_name(text)
 
     # Step 2: Redact PII
     redacted = redact_pii(text)
@@ -77,20 +86,36 @@ def analyze():
     # Step 3: Chunk
     chunks = chunk_text(redacted)
 
-    # Step 4: Retrieve context (use first chunk)
-    context = retrieve_context(chunks[0], embed_model, index, regulations)
+    # Step 4: Retrieve context (returns regulation objects)
+    context_objs = retrieve_context(chunks[0], embed_model, index, regulations)
+    context_texts = [obj["text"] for obj in context_objs]
 
-    # Step 5: LLM
-    result = mock_llm_analysis(context, redacted)
+    # Step 5: LLM Analysis with structured findings
+    result = mock_llm_analysis(context_objs, redacted)
 
-    # Step 6: Validate
-    final_result = validate_output(result, context)
+    # Step 6: Validate & calculate risk metrics
+    final_result = validate_output(result, context_objs)
 
-    return jsonify({
-        "redacted_text": redacted[:500],
-        "context_used": context,
-        "analysis": final_result
-    })
+    processing_time = round(time.time() - start_time, 1)
+
+    # Transform into ragResult format
+    response_payload = {
+        "fileName": file_name,
+        "claimId": f"CLM-{time.strftime('%Y')}-{str(int(time.time()))[-3:]}",
+        "customer": customer_name,
+        "jurisdiction": "India",
+        "summary": {
+            "riskScore": final_result.get("riskScore", 0),
+            "status": final_result.get("status", "Clean"),
+            "confidence": final_result.get("confidence", 94),
+            "processingTime": f"{processing_time} sec"
+        },
+        "findings": final_result.get("findings", []),
+        "context_used": context_texts,
+        "redacted_text": redacted[:500]
+    }
+
+    return jsonify(response_payload)
 
 
 @app.route("/health", methods=["GET"])

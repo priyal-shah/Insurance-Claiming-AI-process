@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ResultProvider } from "./context/ResultContext";
 
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
@@ -11,7 +12,8 @@ import Settings from "./pages/Settings";
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <ResultProvider>
+      <BrowserRouter>
       <Routes>
 
         <Route path="/" element={<Login />} />
@@ -24,6 +26,7 @@ export default function App() {
         <Route path="/settings" element={<Settings />} />
 
       </Routes>
-    </BrowserRouter>
+      </BrowserRouter>
+    </ResultProvider>
   );
 }
