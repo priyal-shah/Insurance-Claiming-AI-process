@@ -66,25 +66,7 @@ index.add(np.array(reg_embeddings))
 
 @app.route("/analyze", methods=["POST"])
 def analyze():
-    # Debug: print what we received
-    print("=== DEBUG INFO ===")
-    print(f"request.files: {list(request.files.keys())}")
-    print(f"request.form: {list(request.form.keys())}")
-    print(f"request.content_type: {request.content_type}")
-    print("==================")
-    
-    # Check if file is present
-    if 'file' not in request.files:
-        return jsonify({
-            "error": "No file provided",
-            "hint": "Make sure to use 'file' as the key name in form-data",
-            "received_keys": list(request.files.keys())
-        }), 400
-    
     file = request.files["file"]
-    
-    if file.filename == '':
-        return jsonify({"error": "No file selected"}), 400
 
     # Step 1: Extract
     text = extract_text(file)
