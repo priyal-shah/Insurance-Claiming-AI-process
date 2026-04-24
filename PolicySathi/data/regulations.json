@@ -1,0 +1,52 @@
+[
+    {
+        "id": "REG001",
+        "text": "All insurance claims must include a valid policy number and the policyholder's signature. Claims missing either will be rejected.",
+        "category": "documentation"
+    },
+    {
+        "id": "REG002",
+        "text": "Claims for medical expenses must be submitted within 30 days of the treatment date. Late submissions require additional justification.",
+        "category": "timelines"
+    },
+    {
+        "id": "REG003",
+        "text": "Pre-existing conditions must be disclosed at the time of policy purchase. Claims related to undisclosed pre-existing conditions may be denied.",
+        "category": "disclosure"
+    },
+    {
+        "id": "REG004",
+        "text": "Supporting documents for claims include: original receipts, medical reports, prescription copies, and identity proof of the claimant.",
+        "category": "documentation"
+    },
+    {
+        "id": "REG005",
+        "text": "Claims exceeding $10,000 require additional verification and may take up to 15 business days for processing.",
+        "category": "processing"
+    },
+    {
+        "id": "REG006",
+        "text": "Policyholders must notify the insurance company within 48 hours of any incident that may lead to a claim.",
+        "category": "timelines"
+    },
+    {
+        "id": "REG007",
+        "text": "Duplicate claims for the same expense will be rejected. All previous claims must be referenced in subsequent submissions.",
+        "category": "validation"
+    },
+    {
+        "id": "REG008",
+        "text": "Claims for dependents must include proof of relationship and dependency status as per policy terms.",
+        "category": "documentation"
+    },
+    {
+        "id": "REG009",
+        "text": "Insurance fraud, including misrepresentation of facts, will result in claim denial and potential legal action.",
+        "category": "compliance"
+    },
+    {
+        "id": "REG010",
+        "text": "Partial claims are allowed for treatments spanning multiple billing cycles. Each partial claim must reference the original treatment plan.",
+        "category": "processing"
+    }
+]

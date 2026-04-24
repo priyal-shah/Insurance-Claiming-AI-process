@@ -2,23 +2,27 @@ import AppLayout from "../layout/AppLayout";
 import KPI from "../components/KPI";
 import Charts from "../components/Charts";
 import { useResult } from "../context/ResultContext";
-import { ragResult } from "../data/ragMockData";
 
 export default function Dashboard() {
   const { result } = useResult();
-  const data = result || ragResult;
 
   return (
     <AppLayout>
 
-      <div className="grid md:grid-cols-4 gap-4">
+      {result ? (
+        <div className="grid md:grid-cols-4 gap-4">
 
-        <KPI title="Risk Score" value={`${data.summary.riskScore}%`} />
-        <KPI title="Confidence" value={`${data.summary.confidence}%`} />
-        <KPI title="Status" value={data.summary.status} />
-        <KPI title="Review Time" value={data.summary.processingTime} />
+          <KPI title="Risk Score" value={`${result.summary.riskScore}%`} />
+          <KPI title="Confidence" value={`${result.summary.confidence}%`} />
+          <KPI title="Status" value={result.summary.status} />
+          <KPI title="Review Time" value={result.summary.processingTime} />
 
-      </div>
+        </div>
+      ) : (
+        <div className="bg-white/5 border border-white/10 p-6 rounded-3xl text-center mb-6">
+          <p className="text-slate-400">Upload a claim file to see analysis results</p>
+        </div>
+      )}
 
       <div className="grid lg:grid-cols-3 gap-6 mt-6">
 
@@ -36,8 +40,8 @@ export default function Dashboard() {
             Latest Findings
           </h2>
 
-          {data.findings && data.findings.length > 0 ? (
-            data.findings.map((item) => (
+          {result && result.findings && result.findings.length > 0 ? (
+            result.findings.map((item) => (
               <div
                 key={item.id}
                 className="bg-white/5 p-4 rounded-2xl mb-3"

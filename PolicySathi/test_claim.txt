@@ -1,0 +1,12 @@
+Insurance Claim Document
+
+Policy Number: 12345678
+Claimant: John Smith
+Phone: 9876543210
+
+Claim Details:
+Medical expenses for treatment received on 2024-01-15.
+Total amount claimed: $5,000
+
+Signature: ___________________
+Date: 2024-01-20

@@ -1,11 +1,9 @@
 import AppLayout from "../layout/AppLayout";
 import FindingsTable from "../components/FindingsTable";
 import { useResult } from "../context/ResultContext";
-import { ragResult } from "../data/ragMockData";
 
 export default function Report() {
   const { result } = useResult();
-  const data = result || ragResult;
 
   return (
     <AppLayout>
@@ -14,7 +12,13 @@ export default function Report() {
         Compliance Risk Report
       </h1>
 
-      <FindingsTable findings={data.findings || []} />
+      {result ? (
+        <FindingsTable findings={result.findings || []} />
+      ) : (
+        <div className="bg-white/5 border border-white/10 p-6 rounded-3xl text-center">
+          <p className="text-slate-400">Upload a claim file to generate a report</p>
+        </div>
+      )}
 
     </AppLayout>
   );

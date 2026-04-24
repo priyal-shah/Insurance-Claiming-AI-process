@@ -31,6 +31,7 @@ def merge_environment_settings(self, url, proxies, stream, verify, cert):
 requests.Session.merge_environment_settings = merge_environment_settings
 
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from sentence_transformers import SentenceTransformer
 import faiss
 import numpy as np
@@ -44,6 +45,7 @@ from BackEnd.Utils import (
 import time
 
 app = Flask(__name__)
+CORS(app)
 
 # ---------------------------
 # 🔹 Load Embedding Model

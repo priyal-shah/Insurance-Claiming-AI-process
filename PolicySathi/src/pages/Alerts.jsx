@@ -1,12 +1,10 @@
 import AppLayout from "../layout/AppLayout";
 import { useResult } from "../context/ResultContext";
-import { ragResult } from "../data/ragMockData";
 
 export default function Alerts() {
   const { result } = useResult();
-  const data = result || ragResult;
 
-  const highRisk = data.findings ? data.findings.filter(
+  const highRisk = result && result.findings ? result.findings.filter(
     (x) => x.severity === "High"
   ) : [];
 
