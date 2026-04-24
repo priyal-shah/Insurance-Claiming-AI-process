@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   return (
@@ -17,7 +18,10 @@ export default function Login() {
 
         <div className="mb-6 flex justify-center">
           <GoogleLogin
-            onSuccess={() => console.log("Google Login")}
+             onSuccess={(credentialResponse) => {
+            localStorage.setItem("token", credentialResponse.credential);
+            window.location.href = "/dashboard";
+            }}
             onError={() => console.log("Failed")}
           />
         </div>
